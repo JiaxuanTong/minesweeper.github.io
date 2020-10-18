@@ -429,8 +429,8 @@ function main(){
             // table = game.createTable(newGameTwoDArray);
             console.log("after!!");
             console.log(game.getStatus());
-            steps++;
-            console.log(steps);
+            // steps++;
+            // console.log(steps);
             document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
             mines--;
             document.querySelector(".status-bar").querySelector(".mines").textContent = mines+"";
