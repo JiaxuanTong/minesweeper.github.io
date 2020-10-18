@@ -64,4 +64,26 @@ a{
     border-radius: 4px;
     margin-top: 5px;
 }
+.popup {
+    padding: 100px 70px;
+    display: none;
+    position: fixed;
+    z-index: 9;
+    background-color: rgba(153, 153, 255, 0.85);
+    /*margin-left:auto;*/
+    /*margin-right:auto;*/
+    /*!*bottom: 47%;*!*/
+    top: 39%;
+    left: 32%;
+    /*right: 50%;*/
+    border: 3px solid white;
+}
+.status{
+    background-color: darkslateblue;
+    text-align: center;
+    color:white;
+}
+.message{
+    color:white;
+}
 

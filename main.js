@@ -275,6 +275,8 @@ let MSGame = (function(){
         }
     }
 
+
+
     return _MSGame;
 
 })();
@@ -286,6 +288,61 @@ function convertTwoDArray(oneDArray){
     }
     return gameTwoDArray;
 }
+let seconds = 0;
+let minutes = 0;
+let hours = 0;
+let t;
+let s, m, h;
+
+function increment(){
+    //basic timer logic
+    seconds ++;
+    if(seconds >=60){
+        seconds = 0;
+        minutes ++;
+        if(minutes >=60){
+            minutes = 0;
+            hours++;
+            if(hours >= 10){
+                console.error("Time exceeds 10 hours!")
+            }
+        }
+    }
+    //toString the timer(showing the timer on screen)
+
+    //second
+    if(seconds <= 9)
+        s = "0"+ seconds;
+    else
+        s = seconds;
+    //minute
+    if(minutes === 0)
+        m = "00";
+    else if(minutes <= 9 && minutes > 0)
+        m = "0" + minutes;
+    else
+        m = minutes;
+    //hour
+    if(hours === 0)
+        h = "00";
+    else if(hours <= 9 && hours > 0)
+        h = "0" + hours;
+    else
+        h = hours;
+    document.querySelector(".status-bar").querySelector(".timer")
+        .textContent = h+":"+m+":"+s;
+
+    timer();
+}
+
+function timer(){
+    //nested function
+    //call the incremental second function every second
+    t = setTimeout(increment,1000);
+}
+function stop(){
+    clearTimeout(t);
+}
 function main(){
     let rows = document.currentScript.getAttribute('data-rows');
     let cols = document.currentScript.getAttribute('data-cols');
@@ -293,6 +350,7 @@ function main(){
 
     console.log("rows cols mines are:" ,rows, cols, mines);
     let game =  new MSGame();
+    let steps = 0;
     game.init(rows,cols,mines);
     console.log(game.getRendering()/*.join("\n")*/);
     let gameOneDArray = game.getRendering();
@@ -305,53 +363,99 @@ function main(){
 
     console.log(gameTwoDArray);
     let table = game.createTable(gameTwoDArray);
-    let newgameTwoDArray;
+    let newGameTwoDArray;
     console.log(game.getStatus());
     // let i = 0;
     // while(true){
     //     if(game.getStatus().done === true){
     //         break;
     //     }
-
-        document.querySelectorAll("td").forEach(item=>{
-            item.addEventListener('click',()=>{
-                let r,c;
-                [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
-                game.uncover(r,c);
-                newgameTwoDArray = convertTwoDArray(game.getRendering());
-                game.updateTable(gameTwoDArray,newgameTwoDArray);
-                [gameTwoDArray,newgameTwoDArray] = [newgameTwoDArray,[]];
-                // table = game.createTable(newgameTwoDArray);
-                console.log("after!!");
-                console.log(game.getStatus());
-            })
-        });
-
+    // timer();
+    let firstClick = true;
     document.querySelectorAll("td").forEach(item=>{
-        item.addEventListener('contextmenu',()=>{
+        item.addEventListener('click',()=>{
+            if(firstClick === true){
+                timer();
+            }
+            firstClick = false;
+            let r,c;
+            [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
+            game.uncover(r,c);
+            newGameTwoDArray = convertTwoDArray(game.getRendering());
+            game.updateTable(gameTwoDArray,newGameTwoDArray);
+            [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
+            // table = game.createTable(newGameTwoDArray);
+            console.log("after!!");
+            console.log(game.getStatus());
+            steps++;
+            console.log(steps);
+            document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
+            if(game.getStatus().done===true){
+                    stop();
+                    if(game.getStatus().exploded === true){
+                        const popup = document.querySelector(".popup");
+                        let status = popup.querySelector(".popup-content").querySelector(".status");
+                        status.textContent = ": (  GAME OVER";
+                        let message = popup.querySelector(".popup-content").querySelector(".message");
+                        message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        popup.style.display = "block";
+
+                        // popup.style.display = "block";
+                    }
+                    else if(game.getStatus().exploded === false){
+                        const popup = document.querySelector(".popup");
+                        let status = popup.querySelector(".popup-content").querySelector(".status");
+                        status.textContent = "Congradulations! You Did It!";
+                        let message = popup.querySelector(".popup-content").querySelector(".message");
+                        message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        popup.style.display = "block";
+                    }
+            }
+        })
+    });
+    document.querySelectorAll("td").forEach(item=>{
+        item.addEventListener('contextmenu',function(e){
+            e.preventDefault();
+            if(firstClick === true){
+                timer();
+            }
+            firstClick = false;
             let r,c;
             [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
             game.mark(r,c);
-            newgameTwoDArray = convertTwoDArray(game.getRendering());
-            game.updateTable(gameTwoDArray,newgameTwoDArray);
-            [gameTwoDArray,newgameTwoDArray] = [newgameTwoDArray,[]];
-            // table = game.createTable(newgameTwoDArray);
+            newGameTwoDArray = convertTwoDArray(game.getRendering());
+            game.updateTable(gameTwoDArray,newGameTwoDArray);
+            [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
+            // table = game.createTable(newGameTwoDArray);
             console.log("after!!");
             console.log(game.getStatus());
+            steps++;
+            console.log(steps);
+            document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
+            mines--;
+            document.querySelector(".status-bar").querySelector(".mines").textContent = mines+"";
+            if(game.getStatus().done===true){
+                stop();
+                if(game.getStatus().exploded === true){
+                    const popup = document.querySelector(".popup");
+                    let status = popup.querySelector(".popup-content").querySelector(".status");
+                    status.textContent = "GAME OVER";
+                    let message = popup.querySelector(".popup-content").querySelector(".message");
+                    message.textContent = "It took you"+ steps +"steps";
+                    popup.style.display = "block";
+                }
+                else if(game.getStatus().exploded === false){
+                    const popup = document.querySelector(".popup");
+                    let status = popup.querySelector(".popup-content").querySelector(".status");
+                    status.textContent = "Congradulations! You did it!";
+                    let message = popup.querySelector(".popup-content").querySelector(".message");
+                    message.textContent = "It took you "+ steps +" steps";
+                    popup.style.display = "block";
+                }
+            }
         })
     });
 
-
-
-
-    //     if(i === 200000){
-    //         return;
-    //     }
-    //     i++;
-    //
-    // }
-    // makeTableHTML(gameTwoDArray);
-    // alert("done!");
 
 }
 main();
