@@ -413,6 +413,7 @@ function main(){
             }
         })
     });
+
     document.querySelectorAll("td").forEach(item=>{
         item.addEventListener('contextmenu',function(e){
             e.preventDefault();
@@ -455,6 +456,46 @@ function main(){
             }
         })
     });
+    $("td").on("taphold",function(){
+        if(firstClick === true){
+            timer();
+        }
+        firstClick = false;
+        let r,c;
+        [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
+        game.mark(r,c);
+        newGameTwoDArray = convertTwoDArray(game.getRendering());
+        game.updateTable(gameTwoDArray,newGameTwoDArray);
+        [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
+        // table = game.createTable(newGameTwoDArray);
+        console.log("after!!");
+        console.log(game.getStatus());
+        // steps++;
+        // console.log(steps);
+        document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
+        mines--;
+        document.querySelector(".status-bar").querySelector(".mines").textContent = mines+"";
+        if(game.getStatus().done===true){
+            stop();
+            if(game.getStatus().exploded === true){
+                const popup = document.querySelector(".popup");
+                let status = popup.querySelector(".popup-content").querySelector(".status");
+                status.textContent = "GAME OVER";
+                let message = popup.querySelector(".popup-content").querySelector(".message");
+                message.textContent = "It took you"+ steps +"steps";
+                popup.style.display = "block";
+            }
+            else if(game.getStatus().exploded === false){
+                const popup = document.querySelector(".popup");
+                let status = popup.querySelector(".popup-content").querySelector(".status");
+                status.textContent = "Congradulations! You did it!";
+                let message = popup.querySelector(".popup-content").querySelector(".message");
+                message.textContent = "It took you "+ steps +" steps";
+                popup.style.display = "block";
+            }
+        }
+    });
+
 
 
 }
