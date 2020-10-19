@@ -85,10 +85,11 @@ a{
 .message{
     color:white;
 }
-@media only screen and( max-width: 480px){
-    .popup{
-        top: 27%;
-        left: 10%;
-    }
-}
+/*@media only screen and( max-width: 480px){*/
+/*    .popup{*/
+/*        top: 27%;*/
+/*        left: 10%;*/
+/*        border: 3px solid black;*/
+/*    }*/
+/*}*/
 
