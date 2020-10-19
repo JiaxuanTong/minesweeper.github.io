@@ -1,6 +1,6 @@
 .popup{
-    top: 28%;
+    padding: 100px 60px;
+    top: 30%;
     left: 0%;
-    right: 0%;
     border: 3px solid black;
 }
