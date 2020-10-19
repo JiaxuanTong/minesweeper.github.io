@@ -186,7 +186,7 @@ let MSGame = (function(){
                     cell.setAttribute("id",rowIndex+"x"+colIndex);
                     cell.style.padding= "20px 20px";
                     if(cellData ==="H"){
-                        cell.style.background = "darkblue";
+                        cell.style.background = "steelblue";
 
                     }else if(cellData === "F"){
                         cell.style.backgroundImage = "url(image/flag2.png)";
@@ -198,11 +198,11 @@ let MSGame = (function(){
                     }
                     else{
                         if(cellData === "0"){
-                            cell.style.background = "gray";
+                            cell.style.background = "rgb(161,174,179)";
                         }
                         else{
                             cell.innerHTML = cellData;
-                            cell.style.background = "gray";
+                            cell.style.background = "rgb(161,174,179)";
                             cell.style.textAlign = "center";
                             cell.style.paddingTop = "10px";
                             cell.style.paddingBottom = "10px";
@@ -228,7 +228,7 @@ let MSGame = (function(){
                     if(oldArray[i][j] !== newArray[i][j]){
                         let cell = document.getElementById(i+"x"+j);
                         if(newArray[i][j] ==="H"){
-                            cell.style.background = "darkblue";
+                            cell.style.background = "steelblue";
 
                         }else if(newArray[i][j] === "F"){
                             cell.style.backgroundImage = "url(image/flag2.png)";
@@ -240,11 +240,11 @@ let MSGame = (function(){
                         }
                         else{
                             if(newArray[i][j] === "0"){
-                                cell.style.background = "gray";
+                                cell.style.background = "rgb(161,174,179)";
                             }
                             else{
                                 cell.innerHTML = newArray[i][j];
-                                cell.style.background = "gray";
+                                cell.style.background = "rgb(161,174,179)";
                                 cell.style.textAlign = "center";
                                 cell.style.paddingTop = "10px";
                                 cell.style.paddingBottom = "10px";
