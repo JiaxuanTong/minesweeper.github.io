@@ -443,7 +443,7 @@ function main(){
         })
     });
     $("td").on("taphold",function(e){
-        e.preventDefault();
+        // e.preventDefault();
         if(firstClick === true){
             timer();
         }
@@ -478,6 +478,7 @@ function main(){
                 popup.style.display = "block";
             }
         }
+
     });
 
 
