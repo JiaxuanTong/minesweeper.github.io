@@ -162,13 +162,12 @@ let MSGame = (function(){
             }
             return res;
         }
+
         //create a visible table
         //      "H" = hidden cell - no bomb
         //      "F" = hidden cell with a mark / flag
         //      "M" = uncovered mine (game should be over now)
         // '0'..'9' = number of mines in adjacent cells
-
-
         createTable(twoDArray){
             // let hiddenCell =
             let table = document.createElement('table');
@@ -222,6 +221,9 @@ let MSGame = (function(){
             //     document.body.removeChild(table);
             // }
         }
+
+        //Once getrendering() returns the new render of the table
+        //the visible table will be updated
         updateTable(oldArray, newArray){
             for(let i = 0; i < oldArray.length; i++){
                 for(let j = 0; j < oldArray[i].length; j++){
@@ -275,11 +277,11 @@ let MSGame = (function(){
         }
     }
 
-
-
     return _MSGame;
 
 })();
+
+//convert the one dimentional array to two dimentional array
 function convertTwoDArray(oneDArray){
     let gameTwoDArray =[];
     for(let i = 0; i < oneDArray.length; i++){
@@ -294,6 +296,7 @@ let hours = 0;
 let t;
 let s, m, h;
 
+//second++
 function increment(){
     //basic timer logic
     seconds ++;
@@ -309,7 +312,6 @@ function increment(){
         }
     }
     //toString the timer(showing the timer on screen)
-
     //second
     if(seconds <= 9)
         s = "0"+ seconds;
@@ -334,12 +336,13 @@ function increment(){
 
     timer();
 }
-
+//timer
 function timer(){
     //nested function
     //call the incremental second function every second
     t = setTimeout(increment,1000);
 }
+//stop the timer
 function stop(){
     clearTimeout(t);
 }
@@ -355,23 +358,12 @@ function main(){
     console.log(game.getRendering()/*.join("\n")*/);
     let gameOneDArray = game.getRendering();
     let gameTwoDArray = convertTwoDArray(gameOneDArray);
-    // gameTwoDArray[7]=["F","M","F","1","2","4","9","0","F","F"];
-    // gameTwoDArray[6]=["M","M","M","M","M","M","M","M","M","M"];
-    // gameTwoDArray[5]=["1","1","1","1","1","1","1","1","1","1"];
-
-
-
     console.log(gameTwoDArray);
     let table = game.createTable(gameTwoDArray);
     let newGameTwoDArray;
     console.log(game.getStatus());
-    // let i = 0;
-    // while(true){
-    //     if(game.getStatus().done === true){
-    //         break;
-    //     }
-    // timer();
     let firstClick = true;
+
     document.querySelectorAll("td").forEach(item=>{
         item.addEventListener('click',()=>{
             if(firstClick === true){
@@ -384,7 +376,6 @@ function main(){
             newGameTwoDArray = convertTwoDArray(game.getRendering());
             game.updateTable(gameTwoDArray,newGameTwoDArray);
             [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
-            // table = game.createTable(newGameTwoDArray);
             console.log("after!!");
             console.log(game.getStatus());
             steps++;
@@ -399,8 +390,6 @@ function main(){
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
-
-                        // popup.style.display = "block";
                     }
                     else if(game.getStatus().exploded === false){
                         const popup = document.querySelector(".popup");
@@ -427,11 +416,8 @@ function main(){
             newGameTwoDArray = convertTwoDArray(game.getRendering());
             game.updateTable(gameTwoDArray,newGameTwoDArray);
             [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
-            // table = game.createTable(newGameTwoDArray);
             console.log("after!!");
             console.log(game.getStatus());
-            // steps++;
-            // console.log(steps);
             document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
             mines--;
             document.querySelector(".status-bar").querySelector(".mines").textContent = mines+"";
@@ -456,7 +442,8 @@ function main(){
             }
         })
     });
-    $("td").on("taphold",function(){
+    $("td").on("taphold",function(e){
+        e.preventDefault();
         if(firstClick === true){
             timer();
         }
@@ -467,11 +454,8 @@ function main(){
         newGameTwoDArray = convertTwoDArray(game.getRendering());
         game.updateTable(gameTwoDArray,newGameTwoDArray);
         [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
-        // table = game.createTable(newGameTwoDArray);
         console.log("after!!");
         console.log(game.getStatus());
-        // steps++;
-        // console.log(steps);
         document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
         mines--;
         document.querySelector(".status-bar").querySelector(".mines").textContent = mines+"";
