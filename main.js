@@ -488,7 +488,7 @@ function main(){
                         popup.style.display = "block";
                     }
                 }
-            },700)
+            },1000)
         })
     })
     // document.querySelectorAll("td").forEach(item=>{
