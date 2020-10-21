@@ -110,7 +110,7 @@ let MSGame = (function(){
             // floodfill all 0-count cells
             const ff = (r,c) => {
                 if( ! this.validCoord(r,c)) return;
-                if( this.arr[r][c].state !== STATE_HIDDEN) return;
+                if( this.arr[r][c].state === STATE_SHOWN) return;
                 this.arr[r][c].state = STATE_SHOWN;
                 this.nuncovered ++;
                 if( this.arr[r][c].count !== 0) return;
@@ -374,6 +374,7 @@ function main(){
     //eventhandler on PC side
     document.querySelectorAll("td").forEach(item=>{
         item.addEventListener('click',()=>{
+            if(game.getStatus().done===true){return;}
             if(firstClick === true){
                 timer();
             }
@@ -403,7 +404,7 @@ function main(){
                     else if(game.getStatus().exploded === false){
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
-                        status.textContent = "Congradulations! You Did It!";
+                        status.textContent = "Congratulations! You Did It!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                         message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -415,6 +416,7 @@ function main(){
 
     document.querySelectorAll("td").forEach(item=>{
         item.addEventListener('contextmenu',function(e){
+            if(game.getStatus().done===true){return;}
             e.preventDefault();
             if(firstClick === true){
                 timer();
@@ -449,7 +451,7 @@ function main(){
                 else if(game.getStatus().exploded === false){
                     const popup = document.querySelector(".popup");
                     let status = popup.querySelector(".popup-content").querySelector(".status");
-                    status.textContent = "Congradulations! You did it!";
+                    status.textContent = "Congratulations! You did it!";
                     let message = popup.querySelector(".popup-content").querySelector(".message");
                     //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                     message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -465,6 +467,7 @@ function main(){
     let endTime = '';
     document.querySelectorAll("td").forEach(item=>{
         item.addEventListener('touchstart', function(){
+            if(game.getStatus().done===true){return;}
             startTime = +new Date();
             longPressTimer = setTimeout(function(){
                 console.log("long press works!")
@@ -501,7 +504,7 @@ function main(){
                     } else if (game.getStatus().exploded === false) {
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
-                        status.textContent = "Congradulations! You did it!";
+                        status.textContent = "Congratulations! You did it!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                         message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -513,6 +516,7 @@ function main(){
     })
     document.querySelectorAll("td").forEach(item=>{
         item.addEventListener('touchend', function(){
+            if(game.getStatus().done===true){return;}
             endTime = +new Date();
             clearTimeout(longPressTimer);
             if(endTime - startTime < 1000) {
@@ -545,7 +549,7 @@ function main(){
                     else if(game.getStatus().exploded === false){
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
-                        status.textContent = "Congradulations! You Did It!";
+                        status.textContent = "Congratulations! You Did It!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                         message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
