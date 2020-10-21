@@ -360,7 +360,7 @@ function main(){
 
     console.log("rows cols mines are:" ,rows, cols, mines);
     let game =  new MSGame();
-    let steps = 0;
+    // let steps = 0;
     game.init(rows,cols,mines);
     console.log(game.getRendering()/*.join("\n")*/);
     let gameOneDArray = game.getRendering();
@@ -386,9 +386,9 @@ function main(){
             [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
             console.log("after!!");
             console.log(game.getStatus());
-            steps++;
-            console.log(steps);
-            document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
+            // steps++;
+            // console.log(steps);
+            // document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
             if(game.getStatus().done===true){
                     stop();
                     if(game.getStatus().exploded === true){
@@ -396,8 +396,8 @@ function main(){
                         let status = popup.querySelector(".popup-content").querySelector(".status");
                         status.textContent = ": (  GAME OVER";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
-                        message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
-                        //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        //message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     }
                     else if(game.getStatus().exploded === false){
@@ -405,8 +405,8 @@ function main(){
                         let status = popup.querySelector(".popup-content").querySelector(".status");
                         status.textContent = "Congradulations! You Did It!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
-                        message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
-                        //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     }
             }
@@ -432,7 +432,7 @@ function main(){
             [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
             console.log("after!!");
             console.log(game.getStatus());
-            document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
+            //document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
             mines--;
             document.querySelector(".status-bar").querySelector(".mines").textContent = mines+"";
             if(game.getStatus().done===true){
@@ -442,8 +442,8 @@ function main(){
                     let status = popup.querySelector(".popup-content").querySelector(".status");
                     status.textContent = "GAME OVER";
                     let message = popup.querySelector(".popup-content").querySelector(".message");
-                    message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
-                    //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                    //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                    message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                     popup.style.display = "block";
                 }
                 else if(game.getStatus().exploded === false){
@@ -451,8 +451,8 @@ function main(){
                     let status = popup.querySelector(".popup-content").querySelector(".status");
                     status.textContent = "Congradulations! You did it!";
                     let message = popup.querySelector(".popup-content").querySelector(".message");
-                    message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
-                    //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                    //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                    message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                     popup.style.display = "block";
                 }
             }
@@ -485,7 +485,7 @@ function main(){
                 [gameTwoDArray, newGameTwoDArray] = [newGameTwoDArray, []];
                 console.log("after!!");
                 console.log(game.getStatus());
-                document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps + "";
+                //document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps + "";
                 mines--;
                 document.querySelector(".status-bar").querySelector(".mines").textContent = mines + "";
                 if (game.getStatus().done === true) {
@@ -495,64 +495,66 @@ function main(){
                         let status = popup.querySelector(".popup-content").querySelector(".status");
                         status.textContent = "GAME OVER";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
-                        message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
-                        // message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     } else if (game.getStatus().exploded === false) {
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
                         status.textContent = "Congradulations! You did it!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
-                        message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
-                        // message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     }
                 }
             },1000)
         })
     })
-    // document.querySelectorAll("td").forEach(item=>{
-    //     item.addEventListener('touchend', function(){
-    //         endTime = +new Date();
-    //         clearTimeout(longPressTimer);
-    //         if(endTime - startTime < 700) {
-    //             if(firstClick === true){
-    //                 timer();
-    //             }
-    //             firstClick = false;
-    //             let r,c;
-    //             [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
-    //             game.uncover(r,c);
-    //             newGameTwoDArray = convertTwoDArray(game.getRendering());
-    //             game.updateTable(gameTwoDArray,newGameTwoDArray);
-    //             [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
-    //             console.log("after!!");
-    //             console.log(game.getStatus());
-    //             steps++;
-    //             console.log(steps);
-    //             document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
-    //             if(game.getStatus().done===true){
-    //                 stop();
-    //                 if(game.getStatus().exploded === true){
-    //                     const popup = document.querySelector(".popup");
-    //                     let status = popup.querySelector(".popup-content").querySelector(".status");
-    //                     status.textContent = ": (  GAME OVER";
-    //                     let message = popup.querySelector(".popup-content").querySelector(".message");
-    //                     message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
-    //                     popup.style.display = "block";
-    //                 }
-    //                 else if(game.getStatus().exploded === false){
-    //                     const popup = document.querySelector(".popup");
-    //                     let status = popup.querySelector(".popup-content").querySelector(".status");
-    //                     status.textContent = "Congradulations! You Did It!";
-    //                     let message = popup.querySelector(".popup-content").querySelector(".message");
-    //                     message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
-    //                     popup.style.display = "block";
-    //                 }
-    //             }
-    //         }
-    //     })
-    // })
+    document.querySelectorAll("td").forEach(item=>{
+        item.addEventListener('touchend', function(){
+            endTime = +new Date();
+            clearTimeout(longPressTimer);
+            if(endTime - startTime < 700) {
+                if(firstClick === true){
+                    timer();
+                }
+                firstClick = false;
+                let r,c;
+                [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
+                game.uncover(r,c);
+                newGameTwoDArray = convertTwoDArray(game.getRendering());
+                game.updateTable(gameTwoDArray,newGameTwoDArray);
+                [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
+                console.log("after!!");
+                console.log(game.getStatus());
+                // steps++;
+                // console.log(steps);
+                // document.querySelector(".status-bar").querySelector(".moveCount").textContent = steps+"";
+                if(game.getStatus().done===true){
+                    stop();
+                    if(game.getStatus().exploded === true){
+                        const popup = document.querySelector(".popup");
+                        let status = popup.querySelector(".popup-content").querySelector(".status");
+                        status.textContent = ": (  GAME OVER";
+                        let message = popup.querySelector(".popup-content").querySelector(".message");
+                        //message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        popup.style.display = "block";
+                    }
+                    else if(game.getStatus().exploded === false){
+                        const popup = document.querySelector(".popup");
+                        let status = popup.querySelector(".popup-content").querySelector(".status");
+                        status.textContent = "Congradulations! You Did It!";
+                        let message = popup.querySelector(".popup-content").querySelector(".message");
+                        //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        popup.style.display = "block";
+                    }
+                }
+            }
+        })
+    })
 
 }
 main();
