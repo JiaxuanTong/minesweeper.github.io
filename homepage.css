@@ -73,8 +73,8 @@ a{
     position: fixed;
     z-index: 9;
     background-color: rgba(161, 174, 237, 0.85);
-    top: 30%;
-    left: 32%;
+    top: 28%;
+    left: 35%;
     border: 3px solid white;
 }
 .status{

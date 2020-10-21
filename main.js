@@ -1,6 +1,6 @@
 // window.addEventListener('load',main);
 
-
+let markingFlag = false;
 let MSGame = (function(){
 
     // private constants
@@ -134,6 +134,12 @@ let MSGame = (function(){
             if( ! this.validCoord(row,col)) return false;
             // if cell already uncovered, refuse this
             console.log("marking previous state=", this.arr[row][col].state);
+            if(this.arr[row][col].state === STATE_MARKED){
+                markingFlag = true;
+            }
+            else{
+                markingFlag = false;
+            }
             if( this.arr[row][col].state === STATE_SHOWN) return false;
             // accept the move and flip the marked status
             this.nmarked += this.arr[row][col].state == STATE_MARKED ? -1 : 1;
@@ -391,6 +397,7 @@ function main(){
                         status.textContent = ": (  GAME OVER";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         message.textContent = "It took you "+ steps + " steps and "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
+                        //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     }
                     else if(game.getStatus().exploded === false){
@@ -399,6 +406,7 @@ function main(){
                         status.textContent = "Congradulations! You Did It!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     }
             }
@@ -415,6 +423,10 @@ function main(){
             let r,c;
             [r, c] = item.getAttribute("id").split("x").map(s=>Number(s));
             game.mark(r,c);
+            if(markingFlag === true){
+                mines++;
+                mines++;
+            }
             newGameTwoDArray = convertTwoDArray(game.getRendering());
             game.updateTable(gameTwoDArray,newGameTwoDArray);
             [gameTwoDArray,newGameTwoDArray] = [newGameTwoDArray,[]];
@@ -430,7 +442,8 @@ function main(){
                     let status = popup.querySelector(".popup-content").querySelector(".status");
                     status.textContent = "GAME OVER";
                     let message = popup.querySelector(".popup-content").querySelector(".message");
-                    message.textContent = "It took you"+ steps +"steps";
+                    message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                    //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                     popup.style.display = "block";
                 }
                 else if(game.getStatus().exploded === false){
@@ -438,7 +451,8 @@ function main(){
                     let status = popup.querySelector(".popup-content").querySelector(".status");
                     status.textContent = "Congradulations! You did it!";
                     let message = popup.querySelector(".popup-content").querySelector(".message");
-                    message.textContent = "It took you "+ steps +" steps";
+                    message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                    //message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                     popup.style.display = "block";
                 }
             }
@@ -462,6 +476,10 @@ function main(){
                 let r, c;
                 [r, c] = item.getAttribute("id").split("x").map(s => Number(s));
                 game.mark(r, c);
+                if(markingFlag === true){
+                    mines++;
+                    mines++;
+                }
                 newGameTwoDArray = convertTwoDArray(game.getRendering());
                 game.updateTable(gameTwoDArray, newGameTwoDArray);
                 [gameTwoDArray, newGameTwoDArray] = [newGameTwoDArray, []];
@@ -477,14 +495,16 @@ function main(){
                         let status = popup.querySelector(".popup-content").querySelector(".status");
                         status.textContent = "GAME OVER";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
-                        message.textContent = "It took you" + steps + "steps";
+                        message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        // message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     } else if (game.getStatus().exploded === false) {
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
                         status.textContent = "Congradulations! You did it!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
-                        message.textContent = "It took you " + steps + " steps";
+                        message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
+                        // message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
                         popup.style.display = "block";
                     }
                 }
