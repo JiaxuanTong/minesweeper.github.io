@@ -515,7 +515,7 @@ function main(){
         item.addEventListener('touchend', function(){
             endTime = +new Date();
             clearTimeout(longPressTimer);
-            if(endTime - startTime < 700) {
+            if(endTime - startTime < 1000) {
                 if(firstClick === true){
                     timer();
                 }
