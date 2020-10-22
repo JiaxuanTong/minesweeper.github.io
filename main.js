@@ -1,3 +1,5 @@
+//Some functions of game engine in this file refers to Dr.Federl's code
+
 // window.addEventListener('load',main);
 
 let markingFlag = false;
