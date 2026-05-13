@@ -1,7 +1,7 @@
 .cell-mine {
     background-color: transparent;
-    background-image: url("image/mine.png"), url("image/cell_hidden.png");
-    background-position: center, center;
-    background-repeat: no-repeat, no-repeat;
-    background-size: 58%, cover;
+    background-image: url("image/mine2.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
