@@ -10,9 +10,14 @@
     <link rel="stylesheet" href="mineCells.css">
     <link rel="stylesheet" href="revealedCells.css">
     <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 580px)" href="mobile.css" >
-    <meta name="viewport" content="width-device-width,initial-scale=0.8>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
 </head>
 <body>
+<button class="music-button" id="musicButton" aria-label="Play music" title="Play music"></button>
+<audio id="bgm" loop preload="auto">
+    <source src="music/JRPG_Keys.mp3" type="audio/mpeg">
+</audio>
+
 <h1>Minesweeper</h1>
 <p>Select a difficulty level:</p>
 <div class="menu">
@@ -40,6 +45,7 @@
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
         crossOrigin="anonymous"></script>
 <script src="main.js" data-rows=8 data-cols=10 data-mines=10></script>
+<script src="music.js"></script>
 
 
 
