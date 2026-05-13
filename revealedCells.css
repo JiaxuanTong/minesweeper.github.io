@@ -1,0 +1,35 @@
+.cell-revealed {
+    position: relative;
+    background: linear-gradient(145deg, #ffd6dc, #f7a2b0);
+    border-radius: 12px;
+    box-shadow:
+        inset 3px 3px 8px rgba(255, 255, 255, 0.42),
+        inset -3px -4px 8px rgba(174, 68, 84, 0.18);
+    cursor: default;
+}
+
+.cell-number-1::after,
+.cell-number-2::after,
+.cell-number-3::after,
+.cell-number-4::after,
+.cell-number-5::after,
+.cell-number-6::after,
+.cell-number-7::after,
+.cell-number-8::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 58%;
+    pointer-events: none;
+}
+
+.cell-number-1::after { background-image: url("image/cell_1.png"); }
+.cell-number-2::after { background-image: url("image/cell_2.png"); }
+.cell-number-3::after { background-image: url("image/cell_3.png"); }
+.cell-number-4::after { background-image: url("image/cell_4.png"); }
+.cell-number-5::after { background-image: url("image/cell_5.png"); }
+.cell-number-6::after { background-image: url("image/cell_6.png"); }
+.cell-number-7::after { background-image: url("image/cell_7.png"); }
+.cell-number-8::after { background-image: url("image/cell_8.png"); }

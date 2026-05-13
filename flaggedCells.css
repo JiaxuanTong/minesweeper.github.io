@@ -1,0 +1,26 @@
+.cell-flagged {
+    background-color: transparent;
+    background-image: url("image/flag2.png"), url("image/cell_hidden.png");
+    background-position: center, center;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 54%, cover;
+    filter: drop-shadow(0 5px 5px rgba(145, 52, 65, 0.22));
+}
+
+.cell-flag-pop {
+    animation: flagPop 280ms cubic-bezier(.18, 1.45, .32, 1);
+}
+
+@keyframes flagPop {
+    0% {
+        opacity: 0.35;
+        transform: scale(0.56) rotate(-7deg);
+    }
+    62% {
+        opacity: 1;
+        transform: scale(1.18) rotate(3deg);
+    }
+    100% {
+        transform: scale(1) rotate(0);
+    }
+}
