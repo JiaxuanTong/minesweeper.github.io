@@ -177,12 +177,11 @@ let MSGame = (function(){
         //      "M" = uncovered mine (game should be over now)
         // '0'..'9' = number of mines in adjacent cells
         createTable(twoDArray){
-            // let hiddenCell =
+            let boardWrap = document.createElement('div');
+            boardWrap.className = "mine-board-wrap";
             let table = document.createElement('table');
+            table.className = "mine-board";
             let rowIndex = 0;
-            table.style.marginTop = "20px";
-            table.style.marginLeft = "auto";
-            table.style.marginRight = "auto";
             // let tableBody = document.createElement('tbody');
             twoDArray.forEach(/*one row of cells in the table*/function(rowData) {
 
@@ -191,43 +190,42 @@ let MSGame = (function(){
                 rowData.forEach(/*each cell of the row*/function(cellData) {
                     let cell = document.createElement('td');
                     cell.setAttribute("id",rowIndex+"x"+colIndex);
-                    cell.style.padding= "20px 20px";
-                    if(cellData ==="H"){
-                        cell.style.background = "steelblue";
-
-                    }else if(cellData === "F"){
-                        cell.style.backgroundImage = "url(image/flag2.png)";
-                        cell.style.backgroundSize="40px 40px"
-                    }
-                    else if(cellData === "M"){
-                        cell.style.backgroundImage = "url(image/mine.png)";
-                        cell.style.backgroundSize="40px 40px"
-                    }
-                    else{
-                        if(cellData === "0"){
-                            cell.style.background = "rgb(161,174,179)";
-                        }
-                        else{
-                            cell.innerHTML = cellData;
-                            cell.style.background = "rgb(161,174,179)";
-                            cell.style.textAlign = "center";
-                            cell.style.paddingTop = "10px";
-                            cell.style.paddingBottom = "10px";
-                            cell.style.paddingLeft = "15px";
-                            cell.style.paddingRight = "15px";
-                        }
-                    }
+                    this.renderCell(cell, cellData, false);
                     tableRow.appendChild(cell);
                     colIndex++;
-                });
+                }, this);
                 table.appendChild(tableRow);
                 rowIndex++;
-            });
+            }, this);
             // table.appendChild(tableBody);
-            document.body.appendChild(table);
+            boardWrap.appendChild(table);
+            document.body.appendChild(boardWrap);
             // function removeTable(){
             //     document.body.removeChild(table);
             // }
+        }
+
+        renderCell(cell, cellData, animate){
+            let className = "mine-cell";
+            cell.textContent = "";
+            if(cellData === "H"){
+                className += " cell-hidden";
+            }else if(cellData === "F"){
+                className += " cell-flagged";
+                if(animate) className += " cell-flag-pop";
+            }
+            else if(cellData === "M"){
+                className += " cell-mine";
+                if(animate) className += " cell-jelly-pop";
+            }
+            else{
+                className += " cell-revealed";
+                if(cellData !== "0"){
+                    className += " cell-number-" + cellData;
+                }
+                if(animate) className += " cell-jelly-pop";
+            }
+            cell.className = className;
         }
 
         //Once getrendering() returns the new render of the table
@@ -237,31 +235,7 @@ let MSGame = (function(){
                 for(let j = 0; j < oldArray[i].length; j++){
                     if(oldArray[i][j] !== newArray[i][j]){
                         let cell = document.getElementById(i+"x"+j);
-                        if(newArray[i][j] ==="H"){
-                            cell.style.background = "steelblue";
-
-                        }else if(newArray[i][j] === "F"){
-                            cell.style.backgroundImage = "url(image/flag2.png)";
-                            cell.style.backgroundSize="40px 40px"
-                        }
-                        else if(newArray[i][j] === "M"){
-                            cell.style.backgroundImage = "url(image/mine.png)";
-                            cell.style.backgroundSize="40px 40px"
-                        }
-                        else{
-                            if(newArray[i][j] === "0"){
-                                cell.style.background = "rgb(161,174,179)";
-                            }
-                            else{
-                                cell.innerHTML = newArray[i][j];
-                                cell.style.background = "rgb(161,174,179)";
-                                cell.style.textAlign = "center";
-                                cell.style.paddingTop = "10px";
-                                cell.style.paddingBottom = "10px";
-                                cell.style.paddingLeft = "15px";
-                                cell.style.paddingRight = "15px";
-                            }
-                        }
+                        this.renderCell(cell, newArray[i][j], true);
                     }
 
                 }

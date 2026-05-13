@@ -1,0 +1,88 @@
+.mine-board-wrap {
+    position: relative;
+    width: max-content;
+    margin: 20px auto 0;
+}
+
+.mine-board-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    background:
+        linear-gradient(135deg,
+            rgba(35, 10, 16, 0.28) 0%,
+            rgba(35, 10, 16, 0.12) 32%,
+            rgba(255, 255, 255, 0.02) 58%,
+            rgba(255, 255, 255, 0.34) 100%);
+    background-size: 100% 100%;
+    background-position: center;
+    border-radius: 10px;
+    mix-blend-mode: soft-light;
+}
+
+.mine-board {
+    border-collapse: separate;
+    border-spacing: 4px;
+    margin: 0;
+}
+
+.mine-cell {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    max-width: 44px;
+    padding: 0;
+    box-sizing: border-box;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border: 0;
+    color: #4b2630;
+    cursor: pointer;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 44px;
+    text-align: center;
+    transition: filter 120ms ease, transform 120ms ease;
+    user-select: none;
+}
+
+.cell-jelly-pop {
+    animation: jellyPop 360ms cubic-bezier(.2, 1.35, .35, 1);
+}
+
+@keyframes jellyPop {
+    0% {
+        transform: scale(0.74, 1.18);
+    }
+    34% {
+        transform: scale(1.14, 0.86);
+    }
+    58% {
+        transform: scale(0.94, 1.06);
+    }
+    82% {
+        transform: scale(1.03, 0.98);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .mine-board {
+        border-spacing: 3px;
+    }
+
+    .mine-cell {
+        width: 34px;
+        height: 34px;
+        min-width: 34px;
+        max-width: 34px;
+        font-size: 18px;
+        line-height: 34px;
+    }
+}

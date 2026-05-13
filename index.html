@@ -3,20 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>minesweeper</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@500;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" type="text/css" media="screen and (max-device-width: 580px)" href="mobile.css">
-    <meta name="viewport" content="width-device-width,initial-scale=0.8>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
 </head>
 
-<body>
+<body class="home-page">
+
+    <button class="music-button" id="musicButton" aria-label="Play music" title="Play music"></button>
+    <audio id="bgm" loop preload="auto">
+        <source src="music/JRPG_Keys.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="menu">
-    <h1>Minesweeper</h1>
+    <h1>MINESWEEPER</h1>
     <p>Select a difficulty level:</p>
         <a href="easy.html"><div class="button" data-size="8x10x10">Easy</div></a>
         <a href="medium.html"><div class="button" data-size="14x18x40">Medium</div></a>
     </div>
 
-
+<script src="music.js"></script>
 </body>
 </html>

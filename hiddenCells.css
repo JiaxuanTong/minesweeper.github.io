@@ -1,0 +1,14 @@
+.cell-hidden {
+    background-image: url("image/cell_hidden.png");
+    filter: drop-shadow(0 5px 5px rgba(145, 52, 65, 0.22));
+}
+
+.cell-hidden:hover {
+    filter: brightness(1.04) drop-shadow(0 7px 6px rgba(145, 52, 65, 0.24));
+    transform: translateY(-1px) scale(1.04, 0.98);
+}
+
+.cell-hidden:active {
+    filter: brightness(0.98) drop-shadow(0 2px 3px rgba(145, 52, 65, 0.18));
+    transform: translateY(3px) scale(1.08, 0.86);
+}
