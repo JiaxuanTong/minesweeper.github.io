@@ -25,20 +25,23 @@
     <a href="easy.html"><div class="button" data-size="8x10x10">Easy</div></a>
     <a href="medium.html"><div class="active-button" data-size="14x18x40">Medium</div></a>
 </div>
-<div class="status-bar">
-<!--    Moves:<span class="moveCount">0</span>-->
-    Mines: <span class="mines">40</span>
-    Time: <span class="timer"><time>00:00:00</time></span>
-
+<div class="game-controls">
+    <div class="status-bar">
+    <!--    Moves:<span class="moveCount">0</span>-->
+        Mines: <span class="mines">40</span>
+        Time: <span class="timer"><time>00:00:00</time></span>
+    </div>
+    <a href="medium.html" class="status-new-game">New Game</a>
 </div>
 
 <div class="popup">
+    <button class="popup-minimize" type="button" aria-label="Hide result">-</button>
     <div class="popup-content">
         <span class="status"></span>
         <br>
         <span class="message">sld</span>
     </div>
-    <a href="index.html"><span class="button">New game</span></a>
+    <a href="medium.html"><span class="button">New game</span></a>
 </div>
 
 <script
@@ -47,6 +50,7 @@
         crossOrigin="anonymous"></script>
 <script src="main.js" data-rows=14 data-cols=18 data-mines=40></script>
 <script src="music.js"></script>
+<script src="ui.js"></script>
 
 </body>
 </html>
