@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const bgm = document.getElementById("bgm");
     const volumeSlider = document.getElementById("volumeSlider");
     const volumeButton = document.getElementById("volumeButton");
+    const musicControls = document.querySelector(".music-controls");
 
     if (!musicButton || !bgm) {
         return;
@@ -51,6 +52,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (bgm.paused) {
             const playRequest = bgm.play();
             musicButton.classList.add("is-playing");
+            if (musicControls) {
+                musicControls.classList.add("is-active");
+            }
             musicButton.setAttribute("aria-label", "Pause music");
             musicButton.setAttribute("title", "Pause music");
             startStars();
@@ -58,6 +62,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if (playRequest) {
                 playRequest.catch(function (error) {
                     musicButton.classList.remove("is-playing");
+                    if (musicControls) {
+                        musicControls.classList.remove("is-active");
+                    }
                     musicButton.setAttribute("aria-label", "Play music");
                     musicButton.setAttribute("title", "Play music");
                     stopStars();
@@ -67,6 +74,9 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             bgm.pause();
             musicButton.classList.remove("is-playing");
+            if (musicControls) {
+                musicControls.classList.remove("is-active");
+            }
             musicButton.setAttribute("aria-label", "Play music");
             musicButton.setAttribute("title", "Play music");
             stopStars();
