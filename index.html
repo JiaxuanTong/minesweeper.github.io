@@ -11,7 +11,13 @@
 
 <body class="home-page">
 
-    <button class="music-button" id="musicButton" aria-label="Play music" title="Play music"></button>
+    <div class="music-controls">
+        <button class="music-button" id="musicButton" aria-label="Play music" title="Play music"></button>
+        <div class="volume-control">
+            <button class="volume-icon" id="volumeButton" type="button" aria-label="Mute music" title="Mute music"></button>
+            <input class="volume-slider" id="volumeSlider" type="range" min="0" max="100" value="60" aria-label="Music volume">
+        </div>
+    </div>
     <audio id="bgm" loop preload="auto">
         <source src="music/JRPG_Keys.mp3" type="audio/mpeg">
     </audio>
