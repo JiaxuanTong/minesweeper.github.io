@@ -1,6 +1,9 @@
 .popup{
-    padding: 100px 60px;
-    top: 30%;
-    left: 9%;
-    border: 3px solid white;
+    width: calc(100% - 28px);
+    max-width: 560px;
+    padding: 56px 24px 42px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid rgba(87, 65, 70, 0.95);
 }
