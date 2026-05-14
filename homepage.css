@@ -1,5 +1,6 @@
 html{
     background-color: #f8c8b8;
+    min-height: 100%;
 }
 body{
     background-color: #f8c8b8;
@@ -8,6 +9,8 @@ body{
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
+    min-height: 100vh;
+    margin: 0;
     font-family: "Silkscreen", sans-serif;
 }
 .music-button{
