@@ -48,6 +48,9 @@
     text-align: center;
     transition: filter 120ms ease, transform 120ms ease;
     user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    touch-action: manipulation;
 }
 
 .cell-jelly-pop {

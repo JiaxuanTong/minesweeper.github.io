@@ -380,7 +380,7 @@ function main(){
                     else if(game.getStatus().exploded === false){
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
-                        status.textContent = "Congratulations! You Did It!";
+                        status.textContent = ">.< Congratulations! You Did It!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                         message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -427,7 +427,7 @@ function main(){
                 else if(game.getStatus().exploded === false){
                     const popup = document.querySelector(".popup");
                     let status = popup.querySelector(".popup-content").querySelector(".status");
-                    status.textContent = "Congratulations! You did it!";
+                    status.textContent = ">.< >.< Congratulations! You did it!";
                     let message = popup.querySelector(".popup-content").querySelector(".message");
                     //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                     message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -442,12 +442,12 @@ function main(){
     let startTime = '';
     let endTime = '';
     document.querySelectorAll("td").forEach(item=>{
-        item.addEventListener('touchstart', function(){
+        item.addEventListener('touchstart', function(e){
             if(game.getStatus().done===true){return;}
+            e.preventDefault();
             startTime = +new Date();
             longPressTimer = setTimeout(function(){
                 console.log("long press works!")
-                // e.preventDefault();
                 if (firstClick === true) {
                     timer();
                 }
@@ -480,7 +480,7 @@ function main(){
                     } else if (game.getStatus().exploded === false) {
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
-                        status.textContent = "Congratulations! You did it!";
+                        status.textContent = ">.< Congratulations! You did it!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                         message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -491,8 +491,9 @@ function main(){
         })
     })
     document.querySelectorAll("td").forEach(item=>{
-        item.addEventListener('touchend', function(){
+        item.addEventListener('touchend', function(e){
             if(game.getStatus().done===true){return;}
+            e.preventDefault();
             endTime = +new Date();
             clearTimeout(longPressTimer);
             if(endTime - startTime < 1000) {
@@ -525,7 +526,7 @@ function main(){
                     else if(game.getStatus().exploded === false){
                         const popup = document.querySelector(".popup");
                         let status = popup.querySelector(".popup-content").querySelector(".status");
-                        status.textContent = "Congratulations! You Did It!";
+                        status.textContent = ">.< Congratulations! You Did It!";
                         let message = popup.querySelector(".popup-content").querySelector(".message");
                         //message.textContent = "It took you "+ steps + " steps and "+h+" hours "+m+" minutes "+s+" seconds";
                         message.textContent = "It took you "+hours+" hours "+minutes+" minutes "+seconds+" seconds";
@@ -533,6 +534,9 @@ function main(){
                     }
                 }
             }
+        })
+        item.addEventListener('touchcancel', function(){
+            clearTimeout(longPressTimer);
         })
     })
 
